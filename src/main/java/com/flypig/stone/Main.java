@@ -7,33 +7,34 @@ import com.flypig.stone.lexer.token.Token;
 
 import java.io.FileReader;
 
+
+/**
+ * i = 0
+ * even = 0
+ * odd = 0 # this is commit
+ * test = (2+4)*3
+ * s = "this is string aaa \" asdfat "
+ * while i < 10
+ * {
+ * 	if i % 2 == 0
+ *        {
+ * 		even = even+i
+ *    }
+ * 	else
+ *    {
+ * 		odd = odd + i
+ *    }
+ * 	i = i + 1
+ * }
+ * even + odd
+ */
+
 public class Main {
 
     public static void main(String[] args){
         System.out.println("hello stone");
 
         try{
-
-            /**
-             * i = 0
-             * even = 0
-             * odd = 0 # this is commit
-             * test = (2+4)*3
-             * s = "this is string aaa \" asdfat "
-             * while i < 10
-             * {
-             * 	if i % 2 == 0
-             *        {
-             * 		even = even+i
-             *    }
-             * 	else
-             *    {
-             * 		odd = odd + i
-             *    }
-             * 	i = i + 1
-             * }
-             * even + odd
-             */
 
             FileReader reader = new FileReader("/Users/admin/stone");
             Lexer lexer = new Lexer(reader);
