@@ -293,8 +293,7 @@ public class Lexer {
             }catch (ParseException e){
                 throw new ParseException(e.getMessage()+" line "+lineNo+" at "+cur, e);
             }
-
-//            tokens.add(new IdToken(lineNo, Token.EOL));
         }
+        tokens.add(new IdToken(lineNo, Token.EOL));
     }
 }

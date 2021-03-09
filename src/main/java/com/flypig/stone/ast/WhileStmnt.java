@@ -17,6 +17,6 @@ public class WhileStmnt extends ASTList{
 
     @Override
     public String toString() {
-        return "(while "+condition()+" "+body()+" )";
+        return "(while "+condition()+" "+body()+")";
     }
 }

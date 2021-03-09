@@ -5,7 +5,7 @@ import com.flypig.stone.exception.StoneException;
 public abstract class Token {
 
     public static final Token EOF = new Token(-1) {};
-    public static final String EOL = "\\n";
+    public static final String EOL = "\n";
 
     private int lineNumber = 0;
     public Token(int lineNumber){

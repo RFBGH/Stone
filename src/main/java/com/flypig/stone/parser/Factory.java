@@ -56,8 +56,8 @@ public abstract class Factory {
                     return (ASTree)m.invoke(null, arg);
                 }
             };
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (Throwable e){
+//            e.printStackTrace();
         }
 
         try{
