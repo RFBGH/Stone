@@ -4,9 +4,12 @@ import com.flypig.stone.ast.ASTList;
 import com.flypig.stone.ast.ASTree;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public abstract class Factory {
+
+    private static final String factoryName = "create";
 
     protected abstract ASTree make0(Object arg) throws Exception;
 
@@ -45,17 +48,17 @@ public abstract class Factory {
             return null;
         }
 
-//        try {
-//            final Method m = clazz.getMethod(factoryName, new Class<?>[]{argType});
-//            return new Factory() {
-//                @Override
-//                protected ASTree make0(Object arg) throws Exception {
-//                    return (ASTree)m.invoke(null, arg);
-//                }
-//            };
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        try {
+            final Method m = clazz.getMethod(factoryName, new Class<?>[]{argType});
+            return new Factory() {
+                @Override
+                protected ASTree make0(Object arg) throws Exception {
+                    return (ASTree)m.invoke(null, arg);
+                }
+            };
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         try{
             final Constructor<? extends ASTree> c = clazz.getConstructor(argType);
