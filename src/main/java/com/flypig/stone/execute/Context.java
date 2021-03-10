@@ -20,7 +20,7 @@ public class Context {
         if(parent != null){
             return parent.getInt(name);
         }
-        throw new RuntimeException("cant find int in "+name);
+        return null;
     }
 
     public void setInt(String name, int i){
@@ -36,7 +36,7 @@ public class Context {
             return parent.getString(name);
         }
 
-        throw new RuntimeException("cant find int in "+name);
+        return null;
     }
 
     public void setString(String name, String str){

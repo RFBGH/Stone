@@ -11,13 +11,19 @@ public class IfStmntExecutor implements IExecutor {
     public Object execute(ASTree asTree, Context context) {
 
         IfStmnt stmnt = (IfStmnt)asTree;
-        if(ExecutorFactory.getInstance().execute(stmnt.condition(), context) != null){
-            ExecutorFactory.getInstance().execute(stmnt.thenBlock(), context);
+        Object result = ExecutorFactory.getInstance().execute(stmnt.condition(), context);
+        if(!(result instanceof Boolean)){
+            throw new RuntimeException("if condition need boolean "+stmnt.condition().toString());
+        }
+
+        Object ret = null;
+        if((Boolean) result){
+            ret = ExecutorFactory.getInstance().execute(stmnt.thenBlock(), context);
         }else{
             if(stmnt.elseBlock() != null){
-                ExecutorFactory.getInstance().execute(stmnt.elseBlock(), context);
+                ret = ExecutorFactory.getInstance().execute(stmnt.elseBlock(), context);
             }
         }
-        return null;
+        return ret;
     }
 }

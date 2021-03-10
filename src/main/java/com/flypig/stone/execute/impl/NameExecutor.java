@@ -9,6 +9,15 @@ public class NameExecutor implements IExecutor {
     @Override
     public Object execute(ASTree asTree, Context context) {
         Name name = (Name) asTree;
-        return context.getInt(name.getName());
+        Object result = context.getInt(name.getName());
+        if(result == null){
+            result = context.getString(name.getName());
+        }
+
+        if(result == null){
+            throw new RuntimeException("result is null "+name.toString());
+        }
+
+        return result;
     }
 }
