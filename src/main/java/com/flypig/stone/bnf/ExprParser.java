@@ -42,6 +42,11 @@ public class ExprParser {
             token(")");
             return ast;
         }else{
+
+            Token token = lexer.read();
+            if(!token.isNumber()){
+                throw new ParseException("need number here token is "+token.toString());
+            }
             return new NumberLiteral(lexer.read());
         }
     }
