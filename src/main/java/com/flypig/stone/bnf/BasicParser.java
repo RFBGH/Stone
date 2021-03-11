@@ -1,5 +1,6 @@
 package com.flypig.stone.bnf;
 
+import com.flypig.stone.StoneConst;
 import com.flypig.stone.ast.*;
 import com.flypig.stone.exception.ParseException;
 import com.flypig.stone.lexer.Lexer;
@@ -44,15 +45,15 @@ public class BasicParser {
         reserved.add("}");
         reserved.add(Token.EOL);
 
-        operators.add("=", 1, Operators.RIGHT);
-        operators.add("==", 2, Operators.LEFT);
-        operators.add(">", 2, Operators.LEFT);
-        operators.add("<", 2, Operators.LEFT);
-        operators.add("+", 3, Operators.LEFT);
-        operators.add("-", 3, Operators.LEFT);
-        operators.add("*", 4, Operators.LEFT);
-        operators.add("/", 4, Operators.LEFT);
-        operators.add("%", 4, Operators.LEFT);
+        operators.add(StoneConst.EQUAL, 1, Operators.RIGHT);
+        operators.add(StoneConst.CHECK_EQUAL, 2, Operators.LEFT);
+        operators.add(StoneConst.BIGGER, 2, Operators.LEFT);
+        operators.add(StoneConst.SMALLER, 2, Operators.LEFT);
+        operators.add(StoneConst.ADD, 3, Operators.LEFT);
+        operators.add(StoneConst.SUB, 3, Operators.LEFT);
+        operators.add(StoneConst.MULT, 4, Operators.LEFT);
+        operators.add(StoneConst.DIVID, 4, Operators.LEFT);
+        operators.add(StoneConst.MOD, 4, Operators.LEFT);
     }
 
     public ASTree parse(Lexer lexer) throws ParseException{
