@@ -134,6 +134,11 @@ public class Lexer {
 
     private int dealUnknown(char c, int lineNo, StringBuilder sb) throws ParseException{
 
+        if(c == ','){
+            tokens.add(new IdToken(lineNo, c+""));
+            return STATE_UNKNOWN;
+        }
+
         if(isSplitChar(c)){
             return STATE_UNKNOWN;
         }
