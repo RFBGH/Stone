@@ -97,6 +97,13 @@ public class BinaryExprExecutor implements IExecutor {
     }
 
     private Object dealAdd(ASTree left, ASTree right, Context context){
+
+        Object leftObject = ExecutorFactory.getInstance().execute(left, context);
+        Object rightObject = ExecutorFactory.getInstance().execute(right, context);
+        if(leftObject instanceof String || rightObject instanceof String){
+            return leftObject.toString()+rightObject.toString();
+        }
+
         int leftValue = getIntValue(left, context);
         int rightValue = getIntValue(right, context);
         return leftValue + rightValue;
