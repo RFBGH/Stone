@@ -26,7 +26,9 @@ public class Context {
 
         Variable var = variable.get(name);
         if(var == null){
-            var = parent.get(name);
+            if(parent != null){
+                var = parent.get(name);
+            }
         }
 
         if(var == null){
@@ -38,5 +40,20 @@ public class Context {
 
     public void set(String name, Variable value){
         variable.put(name, value);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Context{ \n");
+
+        for(String key : variable.keySet()){
+            sb.append(key);
+            sb.append(":");
+            sb.append(variable.get(key));
+            sb.append("\n");
+        }
+
+        sb.append("}");
+        return sb.toString();
     }
 }

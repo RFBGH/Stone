@@ -29,7 +29,7 @@ public abstract class Token {
     }
 
     public int getNumber(){
-        throw new StoneException("token is not number");
+        throw new StoneException("token is not number "+toString());
     }
 
     public int getLineNumber(){

@@ -31,4 +31,11 @@ public class Variable {
         return value instanceof String;
     }
 
+    @Override
+    public String toString() {
+        if(value == null){
+            return "null";
+        }
+        return value.toString();
+    }
 }

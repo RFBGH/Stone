@@ -18,6 +18,11 @@ public class NumberToken extends Token{
     }
 
     @Override
+    public int getNumber() {
+        return value;
+    }
+
+    @Override
     public String getText() {
         return String.valueOf(value);
     }

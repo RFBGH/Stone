@@ -2,6 +2,8 @@ package com.flypig.stone;
 
 import com.flypig.stone.ast.ASTree;
 import com.flypig.stone.bnf.BasicParser;
+import com.flypig.stone.execute.Context;
+import com.flypig.stone.execute.ExecutorFactory;
 import com.flypig.stone.lexer.Lexer;
 import com.flypig.stone.lexer.token.Token;
 
@@ -40,10 +42,15 @@ public class Main {
             Lexer lexer = new Lexer(reader);
 
             BasicParser basicParser = new BasicParser();
+            Context context = new Context(null);
             while (lexer.peek(0) != Token.EOF){
                 ASTree ast = basicParser.parse(lexer);
+                Object result = ExecutorFactory.getInstance().execute(ast, context);
                 System.out.println(ast.toString());
+                System.out.println(result);
             }
+
+            System.out.println(context.toString());
 
 //            while (true){
 //                Token token = lexer.read();
