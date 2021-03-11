@@ -32,6 +32,38 @@ import java.io.FileReader;
  * even + odd
  */
 
+/**
+ * s = "ab" + "cd"
+ * i = 0
+ * even = 0
+ * odd = 0 # this is commit
+ * test = (2+4)*3
+ * s = "this is string aaa \" asdfat "
+ * while i < 10
+ * {
+ * 	if i % 2 == 0
+ *        {
+ * 		even = even+i
+ *    }
+ * 	else
+ *    {
+ * 		odd = odd + i
+ *    }
+ * 	i = i + 1
+ * }
+ * sum = even + odd + fact(10)
+ *
+ * def fact (n)
+ * {
+ * 	f = 1
+ * 	while n > 0
+ *    {
+ * 		f = f * n
+ * 		n = n - 1
+ *    }
+ * 	f
+ * }
+ */
 public class Main {
 
     public static void main(String[] args){
