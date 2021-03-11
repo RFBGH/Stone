@@ -5,42 +5,38 @@ import java.util.Map;
 
 public class Context {
 
-    private Map<String, Integer> intVariable = new HashMap<>();
-    private Map<String, String> strVariable = new HashMap<>();
+    private Map<String, Variable> variable = new HashMap<>();
 
     private Context parent;
     public Context(Context parent){
         this.parent = parent;
     }
 
-    public Integer getInt(String name){
-        if(intVariable.containsKey(name)){
-            return intVariable.get(name);
+    public Variable get(String name){
+        if(variable.containsKey(name)){
+            return variable.get(name);
         }
         if(parent != null){
-            return parent.getInt(name);
+            return parent.get(name);
         }
-        return null;
+        throw new RuntimeException("cant find int in "+name);
     }
 
-    public void setInt(String name, int i){
-        intVariable.put(name, i);
-    }
+    public Variable getOrCreate(String name){
 
-    public String getString(String name){
-        if(strVariable.containsKey(name)){
-            return strVariable.get(name);
+        Variable var = variable.get(name);
+        if(var == null){
+            var = parent.get(name);
         }
 
-        if(parent != null){
-            return parent.getString(name);
+        if(var == null){
+            var = new Variable();
+            variable.put(name, var);
         }
-
-        return null;
+        return var;
     }
 
-    public void setString(String name, String str){
-        strVariable.put(name, str);
+    public void set(String name, Variable value){
+        variable.put(name, value);
     }
-
 }

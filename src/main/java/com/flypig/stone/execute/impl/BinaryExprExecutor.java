@@ -6,6 +6,7 @@ import com.flypig.stone.ast.Name;
 import com.flypig.stone.execute.Context;
 import com.flypig.stone.execute.ExecutorFactory;
 import com.flypig.stone.execute.IExecutor;
+import com.flypig.stone.execute.Variable;
 
 public class BinaryExprExecutor implements IExecutor {
 
@@ -20,6 +21,7 @@ public class BinaryExprExecutor implements IExecutor {
             case "=":
                 return dealEqual(left, right, context);
         }
+        return null;
     }
 
     private Object dealEqual(ASTree left, ASTree right, Context context){
@@ -28,13 +30,8 @@ public class BinaryExprExecutor implements IExecutor {
         }
 
         Object value = ExecutorFactory.getInstance().execute(right, context);
-        if(value instanceof String){
-            context.setString(((Name) left).getName(), value.toString());
-        }else if(value instanceof Integer){
-            context.setInt(((Name) left).getName(), (int)value);
-        }else{
-            throw new RuntimeException("not support type "+right.toString());
-        }
+        Variable variable = context.getOrCreate(((Name) left).getName());
+        variable.setObject(value);
         return value;
     }
 }
