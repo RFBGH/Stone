@@ -44,7 +44,9 @@ public class ASTList extends ASTree{
             sb.append(child.toString());
             sb.append(" ");
         }
-        sb.deleteCharAt(sb.length()-1);
+        if(sb.length() > 1){
+            sb.deleteCharAt(sb.length()-1);
+        }
         sb.append(")");
         return sb.toString();
     }
