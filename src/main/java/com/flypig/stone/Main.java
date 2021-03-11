@@ -1,6 +1,7 @@
 package com.flypig.stone;
 
 import com.flypig.stone.ast.ASTree;
+import com.flypig.stone.ast.DefStmnt;
 import com.flypig.stone.bnf.BasicParser;
 import com.flypig.stone.bnf.FuncParser;
 import com.flypig.stone.execute.Context;
@@ -9,6 +10,10 @@ import com.flypig.stone.lexer.Lexer;
 import com.flypig.stone.lexer.token.Token;
 
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -76,11 +81,23 @@ public class Main {
 
             FuncParser basicParser = new FuncParser();
             Context context = new Context(null);
+
+            List<ASTree>list = new ArrayList<>();
+
             while (lexer.peek(0) != Token.EOF){
                 ASTree ast = basicParser.parse(lexer);
-//                Object result = ExecutorFactory.getInstance().execute(ast, context);
+                if(ast instanceof DefStmnt){
+                    context.putFunc((DefStmnt) ast);
+                }else{
+                    list.add(ast);
+                }
+
                 System.out.println(ast.toString());
-//                System.out.println(result);
+            }
+
+            for(ASTree tree : list){
+                Object result = ExecutorFactory.getInstance().execute(tree, context);
+                System.out.println(result);
             }
 
 //            System.out.println(context.toString());

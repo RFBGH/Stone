@@ -1,15 +1,22 @@
 package com.flypig.stone.execute;
 
+import com.flypig.stone.ast.DefStmnt;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Context {
 
     private Map<String, Variable> variable = new HashMap<>();
+    private Map<String, DefStmnt> func = new HashMap<>();
 
     private Context parent;
     public Context(Context parent){
         this.parent = parent;
+    }
+
+    public Context getParent(){
+        return parent;
     }
 
     public Variable get(String name){
@@ -19,7 +26,7 @@ public class Context {
         if(parent != null){
             return parent.get(name);
         }
-        throw null;
+        return null;
     }
 
     public Variable getOrCreate(String name){
@@ -40,6 +47,25 @@ public class Context {
 
     public void set(String name, Variable value){
         variable.put(name, value);
+    }
+
+    public void setFunc(Map<String, DefStmnt> func){
+        if(func == null){
+            return;
+        }
+        this.func.putAll(func);
+    }
+
+    public Map<String, DefStmnt> getFunc(){
+        return func;
+    }
+
+    public void putFunc(DefStmnt defStmnt){
+        func.put(defStmnt.getName(), defStmnt);
+    }
+
+    public DefStmnt getFunc(String name){
+        return func.get(name);
     }
 
     @Override

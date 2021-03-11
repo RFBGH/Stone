@@ -4,6 +4,14 @@ public class Variable {
 
     private Object value;
 
+    public Variable(){
+
+    }
+
+    public Variable(Object value){
+        this.value = value;
+    }
+
     public void setObject(Object value){
         this.value = value;
     }
