@@ -19,7 +19,7 @@ public class Context {
         if(parent != null){
             return parent.get(name);
         }
-        throw new RuntimeException("cant find int in "+name);
+        throw null;
     }
 
     public Variable getOrCreate(String name){
