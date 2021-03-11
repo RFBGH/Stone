@@ -47,6 +47,7 @@ public class Context {
         StringBuilder sb = new StringBuilder("Context{ \n");
 
         for(String key : variable.keySet()){
+            sb.append(" ");
             sb.append(key);
             sb.append(":");
             sb.append(variable.get(key));
