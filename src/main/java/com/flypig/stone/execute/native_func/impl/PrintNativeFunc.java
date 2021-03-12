@@ -10,7 +10,7 @@ public class PrintNativeFunc implements INativeFunc {
 
     @Override
     public Object invoke(Object... args) {
-        System.out.println("native "+args[0]);
+        System.out.println(args[0]);
         return null;
     }
 }
