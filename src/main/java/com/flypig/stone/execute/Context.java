@@ -65,7 +65,13 @@ public class Context {
     }
 
     public DefStmnt getFunc(String name){
-        return func.get(name);
+        if(func.containsKey(name)){
+            return func.get(name);
+        }
+        if(parent != null){
+            return parent.getFunc(name);
+        }
+        return null;
     }
 
     @Override
