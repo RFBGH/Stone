@@ -52,7 +52,9 @@ public class PrimaryExprExecutor implements IExecutor {
                     ClassBody parentClassBody = parentClassStmnt.getClassBody();
                     for(ASTree child:parentClassBody){
                         if(child instanceof DefStmnt){
-                            nestContext.putFunc((DefStmnt)child);
+                            if (nestContext.getFunc(((DefStmnt) child).getName()) == null) {
+                                nestContext.putFunc((DefStmnt)child);
+                            }
                         }else{
                             ExecutorFactory.getInstance().execute(child, nestContext);
                         }
