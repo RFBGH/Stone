@@ -104,7 +104,7 @@ public class Main {
 //                System.out.println(result);
             }
 
-//            System.out.println(context.toString());
+            System.out.println(context.toString());
 
 //            while (true){
 //                Token token = lexer.read();

@@ -1,0 +1,85 @@
+class Point
+{
+	x = 0
+	y = 0
+	def move(dx, dy)
+	{
+		x = x + dx
+		y = y + dy
+	}
+	
+	def toString()
+	{
+		"x:"+x+" "+"y:"+y;
+	}
+}
+
+class Point3D extends Point
+{
+	z = 0
+	def move3D(dx, dy, dz)
+	{
+		move(dx, dy)
+		z = z + dz
+	}
+	
+	def to3DString()
+	{
+		"x:"+x+" "+"y:"+y+" "+"z:"+z;
+	}
+	
+	def toString()
+	{
+		"override" + "x:"+x+" "+"y:"+y+" "+"z:"+z;
+	}
+}
+
+def testClass()
+{
+	point = Point.new
+	point.move(2, 3)
+	print(point.toString())
+	point.x = 10
+	print(point.x+point.y)
+	
+	point3d = Point3D.new
+	point3d.move3D(1,2,3)
+	print(point3d.x+point3d.y+point3d.z)
+	print(point3d.toString())
+	"sucs"
+}
+
+p = 2
+
+print(testClass())
+
+s = "ab" + "cd"
+i = 0
+even = 0
+odd = 0 # this is commit
+test = (2+4)*3
+s = "this is string aaa \" asdfat "
+while i < 10
+{
+	if i % 2 == 0
+       {
+		even = even+i
+   }
+	else
+   {
+		odd = odd + i
+   }
+	i = i + 1
+}
+sum = even + odd + fact(10)
+
+def fact (n)
+{
+	f = 1
+	while n > 0
+	{
+		f = f * n
+		n = n - 1
+	}
+	f
+}
