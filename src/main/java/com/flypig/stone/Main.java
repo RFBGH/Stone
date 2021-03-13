@@ -3,6 +3,7 @@ package com.flypig.stone;
 import com.flypig.stone.ast.ASTree;
 import com.flypig.stone.ast.DefStmnt;
 import com.flypig.stone.bnf.BasicParser;
+import com.flypig.stone.bnf.ClassParser;
 import com.flypig.stone.bnf.FuncParser;
 import com.flypig.stone.execute.Context;
 import com.flypig.stone.execute.ExecutorFactory;
@@ -76,29 +77,29 @@ public class Main {
 
         try{
 
-            FileReader reader = new FileReader("/Users/admin/stone");
+            FileReader reader = new FileReader("E:/stone.txt");
             Lexer lexer = new Lexer(reader);
 
-            FuncParser basicParser = new FuncParser();
-            Context context = new Context(null);
+            ClassParser basicParser = new ClassParser();
+//            Context context = new Context(null);
 
-            List<ASTree>list = new ArrayList<>();
+//            List<ASTree>list = new ArrayList<>();
 
             while (lexer.peek(0) != Token.EOF){
                 ASTree ast = basicParser.parse(lexer);
-                if(ast instanceof DefStmnt){
-                    context.putFunc((DefStmnt) ast);
-                }else{
-                    list.add(ast);
-                }
+//                if(ast instanceof DefStmnt){
+//                    context.putFunc((DefStmnt) ast);
+//                }else{
+//                    list.add(ast);
+//                }
 
                 System.out.println(ast.toString());
             }
 
-            for(ASTree tree : list){
-                Object result = ExecutorFactory.getInstance().execute(tree, context);
-                System.out.println(result);
-            }
+//            for(ASTree tree : list){
+//                Object result = ExecutorFactory.getInstance().execute(tree, context);
+//                System.out.println(result);
+//            }
 
 //            System.out.println(context.toString());
 

@@ -1,5 +1,6 @@
 package com.flypig.stone.execute;
 
+import com.flypig.stone.ast.ClassStmnt;
 import com.flypig.stone.ast.DefStmnt;
 
 import java.util.HashMap;
@@ -9,6 +10,7 @@ public class Context {
 
     private Map<String, Variable> variable = new HashMap<>();
     private Map<String, DefStmnt> func = new HashMap<>();
+    private Map<String, ClassStmnt> clazz = new HashMap<>();
 
     private Context parent;
     public Context(Context parent){
@@ -88,5 +90,20 @@ public class Context {
 
         sb.append("}");
         return sb.toString();
+    }
+
+    public ClassStmnt getClass(String name){
+        if(clazz.containsKey(name)){
+            return clazz.get(name);
+        }
+
+        if(parent != null){
+            return parent.getClass(name);
+        }
+        return null;
+    }
+
+    public void putClass(ClassStmnt classStmnt){
+        clazz.put(classStmnt.getName(), classStmnt);
     }
 }

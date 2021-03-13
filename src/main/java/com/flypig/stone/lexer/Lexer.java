@@ -216,9 +216,20 @@ public class Lexer {
             lastC = sb.charAt(sb.length()-1);
         }
 
+        if(c == '.'){
+
+            if(sb.length() != 0){
+                tokens.add(new IdToken(lineNo, sb.toString()));
+                sb.delete(0, sb.length());
+            }
+
+            tokens.add(new IdToken(lineNo, "."));
+            return STATE_UNKNOWN;
+        }
+
         if(!isDoubleOpFirst(lastC)){
 
-            if(isAZaz_Char(c)){
+            if(isAZaz_Char(c) || isNumberChar(c)){
                 sb.append(c);
                 return STATE_ID;
             }
@@ -228,7 +239,7 @@ public class Lexer {
             return dealUnknown(c, lineNo, sb);
         }
 
-        if(isAZaz_Char(c)){
+        if(isAZaz_Char(c) || isNumberChar(c)){
             tokens.add(new IdToken(lineNo, sb.toString()));
             sb.delete(0, sb.length());
             sb.append(c);
