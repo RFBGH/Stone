@@ -50,20 +50,31 @@ public class BinaryExprExecutor implements IExecutor {
         throw new RuntimeException("unsupport op "+binaryExpr.toString());
     }
 
+    private Object getValue(Object o){
+
+        while (o instanceof Variable){
+            o = ((Variable) o).getObject();
+        }
+        return o;
+    }
+
     private Object dealEqual(ASTree left, ASTree right, Context context){
-        if(!(left instanceof Name)){
+
+        Object leftVariable = ExecutorFactory.getInstance().execute(left, context);
+        if(!(leftVariable instanceof Variable)){
             throw new RuntimeException("= left need variable "+left.toString());
         }
 
         Object value = ExecutorFactory.getInstance().execute(right, context);
-        Variable variable = context.getOrCreate(((Name) left).getName());
+        value = getValue(value);
+        Variable variable = (Variable)leftVariable;
         variable.setObject(value);
         return value;
     }
 
     private Object dealCheckEqual(ASTree left, ASTree right, Context context){
-        Object leftValue = ExecutorFactory.getInstance().execute(left, context);
-        Object rightValue = ExecutorFactory.getInstance().execute(right, context);
+        Object leftValue = getValue(ExecutorFactory.getInstance().execute(left, context));
+        Object rightValue = getValue(ExecutorFactory.getInstance().execute(right, context));
 
         if(leftValue == null && rightValue == null){
             return true;
@@ -78,6 +89,7 @@ public class BinaryExprExecutor implements IExecutor {
 
     private int getIntValue(ASTree tree, Context context){
         Object value = ExecutorFactory.getInstance().execute(tree, context);
+        value = getValue(value);
         if(!(value instanceof Integer)){
             throw new RuntimeException("tree is not int "+tree.toString());
         }
@@ -98,8 +110,8 @@ public class BinaryExprExecutor implements IExecutor {
 
     private Object dealAdd(ASTree left, ASTree right, Context context){
 
-        Object leftObject = ExecutorFactory.getInstance().execute(left, context);
-        Object rightObject = ExecutorFactory.getInstance().execute(right, context);
+        Object leftObject = getValue(ExecutorFactory.getInstance().execute(left, context));
+        Object rightObject = getValue(ExecutorFactory.getInstance().execute(right, context));
         if(leftObject instanceof String || rightObject instanceof String){
             return leftObject.toString()+rightObject.toString();
         }

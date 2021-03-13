@@ -106,4 +106,12 @@ public class Context {
     public void putClass(ClassStmnt classStmnt){
         clazz.put(classStmnt.getName(), classStmnt);
     }
+
+    public Object getWithoutInherit(String name){
+        return variable.get(name);
+    }
+
+    public DefStmnt getFuncWithoutInnherit(String name){
+        return func.get(name);
+    }
 }

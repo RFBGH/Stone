@@ -10,10 +10,6 @@ public class NameExecutor implements IExecutor {
     @Override
     public Object execute(ASTree asTree, Context context) {
         Name name = (Name) asTree;
-        Variable variable = context.get(name.getName());
-        if(variable == null){
-            throw new RuntimeException("null in name "+asTree.toString());
-        }
-        return variable.getObject();
+        return context.getOrCreate(name.getName());
     }
 }

@@ -1,6 +1,7 @@
 package com.flypig.stone;
 
 import com.flypig.stone.ast.ASTree;
+import com.flypig.stone.ast.ClassStmnt;
 import com.flypig.stone.ast.DefStmnt;
 import com.flypig.stone.bnf.BasicParser;
 import com.flypig.stone.bnf.ClassParser;
@@ -81,25 +82,27 @@ public class Main {
             Lexer lexer = new Lexer(reader);
 
             ClassParser basicParser = new ClassParser();
-//            Context context = new Context(null);
+            Context context = new Context(null);
 
-//            List<ASTree>list = new ArrayList<>();
+            List<ASTree>list = new ArrayList<>();
 
             while (lexer.peek(0) != Token.EOF){
                 ASTree ast = basicParser.parse(lexer);
-//                if(ast instanceof DefStmnt){
-//                    context.putFunc((DefStmnt) ast);
-//                }else{
-//                    list.add(ast);
-//                }
+                if(ast instanceof DefStmnt){
+                    context.putFunc((DefStmnt) ast);
+                }else if(ast instanceof ClassStmnt){
+                    context.putClass((ClassStmnt)ast);
+                }else{
+                    list.add(ast);
+                }
 
                 System.out.println(ast.toString());
             }
 
-//            for(ASTree tree : list){
-//                Object result = ExecutorFactory.getInstance().execute(tree, context);
+            for(ASTree tree : list){
+                Object result = ExecutorFactory.getInstance().execute(tree, context);
 //                System.out.println(result);
-//            }
+            }
 
 //            System.out.println(context.toString());
 
